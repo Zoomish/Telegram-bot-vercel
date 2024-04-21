@@ -1,13 +1,6 @@
 import TeleBot from "telebot";
-const bot = new TeleBot({
-  token: process.env.TELEGRAM_BOT_TOKEN,
-  polling: {
-    interval: 1000,
-    timeout: 0,
-    limit: 100,
-    retryTimeout: 5000,
-  },
-});
+
+const bot = new TeleBot(process.env.TELEGRAM_BOT_TOKEN);
 const WebUrlit = "https://rococo-wisp-b5b1a7.netlify.app/";
 
 // On commands
@@ -21,14 +14,9 @@ bot.on(["/start", "/back"], (msg) => {
   );
   fetch("https://jsonplaceholder.typicode.com/todos/1")
     .then((response) => response.json())
-    .then((json) => {
-      console.log(json.title);
-    })
-    .finally(() => {
-      return bot.sendMessage(msg.from.id, "AAAAAAAAAAAAAAAAAAAAA", {
-        replyMarkup,
-      });
-    });
+    .then((json) => console.log(json));
+
+  return bot.sendMessage(msg.from.id, "HI", { replyMarkup });
 });
 
 // Buttons
