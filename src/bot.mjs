@@ -1,6 +1,13 @@
 import TeleBot from "telebot";
-
-const bot = new TeleBot(process.env.TELEGRAM_BOT_TOKEN);
+const bot = new TeleBot({
+    token: process.env.TELEGRAM_BOT_TOKEN,
+    polling: {
+        interval: 1000,
+        timeout: 0,
+        limit: 100,
+        retryTimeout: 5000
+    }
+});
 const WebUrlit = "https://rococo-wisp-b5b1a7.netlify.app/";
 
 // On commands
