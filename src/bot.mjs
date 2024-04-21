@@ -17,7 +17,7 @@ bot.on(["/start", "/back"], (msg) => {
     .then((json) => {
       console.log(json);
     });
-  return bot.sendMessage(msg.from.id, json.toString(), { replyMarkup });
+  return bot.sendMessage(msg.from.id, 'AAAAAAAAAAAAAAAAAAAAA', { replyMarkup });
 });
 
 // Buttons
