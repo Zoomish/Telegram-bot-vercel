@@ -1,5 +1,5 @@
 import TeleBot from "telebot";
-import * as projects from "./projects.json";
+import endpoints from '../constants/endpoints';
 const bot = new TeleBot(process.env.TELEGRAM_BOT_TOKEN);
 const WebUrlit = "https://rococo-wisp-b5b1a7.netlify.app/";
 
@@ -12,7 +12,7 @@ bot.on(["/start", "/back"], (msg) => {
     ],
     { resize: true }
   );
-  fetch(projects, {
+  fetch(endpoints.projects, {
     method: "GET",
   })
     .then((res) => console.log(res.json()))
