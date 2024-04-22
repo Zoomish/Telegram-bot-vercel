@@ -21,7 +21,7 @@ bot.on(["/start", "/back"], async (msg) => {
     ],
     { resize: true }
   );
-  console.log(endpoints);
+  console.log(endpoints.projects);
   await fetch(endpoints.projects, {
     method: "GET",
   })
