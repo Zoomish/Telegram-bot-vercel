@@ -22,7 +22,7 @@ bot.on(["/start", "/back"], async (msg) => {
     { resize: true }
   );
   console.log(endpoints.default);
-  await fetch(endpoints.projects, {
+  await fetch(endpoints.default.projects, {
     method: "GET",
   })
     .then((res) => res.json())
