@@ -1,5 +1,5 @@
 import TeleBot from "telebot";
-import endpoints from './endpoints';
+import endpoints from './endpoints.js';
 const bot = new TeleBot(process.env.TELEGRAM_BOT_TOKEN);
 const WebUrlit = "https://rococo-wisp-b5b1a7.netlify.app/";
 
