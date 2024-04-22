@@ -4,7 +4,7 @@ const bot = new TeleBot(process.env.TELEGRAM_BOT_TOKEN);
 const WebUrlit = "https://rococo-wisp-b5b1a7.netlify.app/";
 
 // On commands
-bot.on(["/start", "/back"], (msg) => {
+bot.on(["/start", "/back"], async (msg) => {
   let replyMarkup = bot.keyboard(
     [
       ["/buttons", "/inlineKeyboard"],
@@ -12,7 +12,9 @@ bot.on(["/start", "/back"], (msg) => {
     ],
     { resize: true }
   );
-  console.log("AAAAAAAAAAAAAA");
+  await fetch(endpoints.projects).then((res) => res.json()).then((data) => {
+    console.log(data);
+  })
   return bot.sendMessage(msg.from.id, "HI", { replyMarkup });
 });
 
