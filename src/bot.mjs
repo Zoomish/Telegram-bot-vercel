@@ -12,7 +12,11 @@ bot.on(["/start", "/back"], (msg) => {
     ],
     { resize: true }
   );
-  console.log(projects);
+  fetch(projects, {
+    method: "GET",
+  })
+    .then((res) => console.log(res.json()))
+    .catch((err) => err);
   return bot.sendMessage(msg.from.id, "HI", { replyMarkup });
 });
 
