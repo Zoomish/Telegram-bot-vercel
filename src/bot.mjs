@@ -12,9 +12,13 @@ bot.on(["/start", "/back"], async (msg) => {
     ],
     { resize: true }
   );
-  await fetch(endpoints.projects).then((res) => res.json()).then((data) => {
-    console.log(data);
+  await fetch(endpoints.projects, {
+    method: "GET",
   })
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+    });
   return bot.sendMessage(msg.from.id, "HI", { replyMarkup });
 });
 
