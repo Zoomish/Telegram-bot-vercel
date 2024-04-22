@@ -1,10 +1,12 @@
 import TeleBot from "telebot";
-import endpoints from './endpoints.js';
+import endpoints from "./endpoints.js";
 const bot = new TeleBot(process.env.TELEGRAM_BOT_TOKEN);
 const WebUrlit = "https://rococo-wisp-b5b1a7.netlify.app/";
 
 // On commands
 bot.on(["/start", "/back"], (msg) => {
+  bot.start();
+
   let replyMarkup = bot.keyboard(
     [
       ["/buttons", "/inlineKeyboard"],
@@ -17,6 +19,7 @@ bot.on(["/start", "/back"], (msg) => {
   })
     .then((res) => console.log(res.json()))
     .catch((err) => err);
+  bot.getMe().then((me) => bot.sendMessage(msg.from.id, me, { replyMarkup }));
   return bot.sendMessage(msg.from.id, "HI", { replyMarkup });
 });
 
