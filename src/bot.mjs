@@ -19,7 +19,7 @@ bot.on(["/start", "/back"], (msg) => {
   })
     .then((res) => console.log(res.json()))
     .catch((err) => err);
-  bot.getMe().then((me) => bot.sendMessage(msg.from.id, me, { replyMarkup }));
+  bot.getMe().then((me) => console.log(me));
   return bot.sendMessage(msg.from.id, "HI", { replyMarkup });
 });
 
