@@ -21,14 +21,6 @@ bot.on(["/start", "/back"], async (msg) => {
     ],
     { resize: true }
   );
-  console.log(endpoints.default);
-  await fetch(endpoints.default.projects, {
-    method: "GET",
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      console.log(data);
-    });
   return bot.sendMessage(msg.from.id, "HI", { replyMarkup });
 });
 
