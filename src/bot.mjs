@@ -92,7 +92,7 @@ bot.on(["location", "contact"], (msg, self) => {
 bot.on("/inlineKeyboard", (msg) => {
   let replyMarkup = bot.inlineKeyboard([
     [
-      bot.inlineButton("callback", { callback: "this_is_data" }),
+      bot.inlineButton("callback", { callback: "callbackQuery" }),
       bot.inlineButton("inline", { inline: "some query" }),
     ],
     [bot.inlineButton("url", { url: "https://telegram.org" })],
