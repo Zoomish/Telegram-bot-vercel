@@ -136,32 +136,38 @@ bot.on("inlineQuery", (msg) => {
   return bot.answerQuery(answers);
 });
 
-// bot.on('/start', async (msg) => {
-//     const chatId = msg.from.id;
+bot.on("inlineQuery", (msg) => {
+  let query = msg.query;
+  console.log(`inline query: ${query}`);
 
-//     // await bot.sendMessage(msg.from.id,bot.keyboard([['form']], {resize: true}))
+  // Create a new answer list object
+  const answers = bot.answerList(msg.id, { cacheTime: 60 });
 
-//     let replyMarkup = bot.inlineKeyboard([[bot.inlineButton('url', {url: 'https://rococo-wisp-b5b1a7.netlify.app/'})]]);
+  // Article
+  answers.addArticle({
+    id: "query",
+    title: "Inline Title",
+    description: `Your query: ${query}`,
+    message_text: "Click!",
+  });
 
-//     await bot.sendMessage(msg.from.id, 'Check up:', {replyMarkup});
+  // Photo
+  answers.addPhoto({
+    id: "photo",
+    caption: "Telegram logo.",
+    photo_url: "https://telegram.org/img/t_logo.png",
+    thumb_url: "https://telegram.org/img/t_logo.png",
+  });
 
-//     // if (msg?.web_app_data?.data) {
-//     //     try {
-//     //         const data=JSON.parse(msg?.web_app_data?.data)
+  // Gif
+  answers.addGif({
+    id: "gif",
+    gif_url: "https://telegram.org/img/tl_card_wecandoit.gif",
+    thumb_url: "https://telegram.org/img/tl_card_wecandoit.gif",
+  });
 
-//     //         await bot.sendMessage(chatId, 'Ваша страна: ' + data?.country)
-//     //         await bot.sendMessage(chatId, 'Ваша улица: ' + data?.street)
-//     //         await bot.sendMessage(chatId, 'Спасибо за форму!')
-
-//     //         setTimeout(async ()=>{
-//     //             await bot.sendMessage(chatId,'Всю  ифнормацию можно получить по... Никак!');
-//     //         }, 3000)
-
-//     //     }catch(e){
-//     //         console.log(e);
-//     //     }
-
-//     // }
-// });
+  // Send answers
+  return bot.answerQuery(answers);
+});
 
 export default bot;
