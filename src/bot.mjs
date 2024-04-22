@@ -5,8 +5,6 @@ const WebUrlit = "https://rococo-wisp-b5b1a7.netlify.app/";
 
 // On commands
 bot.on(["/start", "/back"], (msg) => {
-  bot.start();
-
   let replyMarkup = bot.keyboard(
     [
       ["/buttons", "/inlineKeyboard"],
@@ -14,12 +12,7 @@ bot.on(["/start", "/back"], (msg) => {
     ],
     { resize: true }
   );
-  fetch(endpoints.projects, {
-    method: "GET",
-  })
-    .then((res) => console.log(res.json()))
-    .catch((err) => err);
-  bot.getMe().then((me) => console.log(me));
+  console.log("AAAAAAAAAAAAAA");
   return bot.sendMessage(msg.from.id, "HI", { replyMarkup });
 });
 
