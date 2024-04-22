@@ -12,8 +12,7 @@ const bot = new TeleBot({
 });
 const WebUrlit = "https://rococo-wisp-b5b1a7.netlify.app/";
 
-// On commands
-bot.on(["/start", "/back"], async (msg) => {
+bot.on(["/start", "/back"], (msg) => {
   let replyMarkup = bot.keyboard(
     [
       ["/buttons", "/inlineKeyboard"],
@@ -21,43 +20,10 @@ bot.on(["/start", "/back"], async (msg) => {
     ],
     { resize: true }
   );
-  return bot.sendMessage(msg.from.id, "HI", { replyMarkup });
+
+  return bot.sendMessage(msg.from.id, "Keyboard example.", { replyMarkup });
 });
 
-// On start command
-bot.on("/start", (msg) => {
-  const id = msg.from.id;
-
-  // Ask user name
-  return bot.sendMessage(id, "What is your name?", { ask: "name" });
-});
-
-// Ask name event
-bot.on("ask.name", (msg) => {
-  const id = msg.from.id;
-  const name = msg.text;
-
-  // Ask user age
-  return bot.sendMessage(id, `Nice to meet you, ${name}! How old are you?`, {
-    ask: "age",
-  });
-});
-
-// Ask age event
-bot.on("ask.age", (msg) => {
-  const id = msg.from.id;
-  const age = Number(msg.text);
-
-  if (!age) {
-    // If incorrect age, ask again
-    return bot.sendMessage(id, "Incorrect age. Please, try again!", {
-      ask: "age",
-    });
-  } else {
-    // Last message (don't ask)
-    return bot.sendMessage(id, `You are ${age} years old. Great!`);
-  }
-});
 // Buttons
 bot.on("/buttons", (msg) => {
   let replyMarkup = bot.keyboard(
@@ -71,7 +37,7 @@ bot.on("/buttons", (msg) => {
     { resize: true }
   );
 
-  return bot.sendMessage(msg.from.id, " ", { replyMarkup });
+  return bot.sendMessage(msg.from.id, "Button example.", { replyMarkup });
 });
 
 // Hide keyboard
@@ -92,7 +58,7 @@ bot.on(["location", "contact"], (msg, self) => {
 bot.on("/inlineKeyboard", (msg) => {
   let replyMarkup = bot.inlineKeyboard([
     [
-      bot.inlineButton("callback", { callback: "callbackQuery" }),
+      bot.inlineButton("callback", { callback: "this_is_data" }),
       bot.inlineButton("inline", { inline: "some query" }),
     ],
     [bot.inlineButton("url", { url: "https://telegram.org" })],
@@ -125,40 +91,6 @@ bot.on("inlineQuery", (msg) => {
     message_text: "Click!",
   });
 
-  return bot.answerQuery(answers);
-});
-
-bot.on("inlineQuery", (msg) => {
-  let query = msg.query;
-  console.log(`inline query: ${query}`);
-
-  // Create a new answer list object
-  const answers = bot.answerList(msg.id, { cacheTime: 60 });
-
-  // Article
-  answers.addArticle({
-    id: "query",
-    title: "Inline Title",
-    description: `Your query: ${query}`,
-    message_text: "Click!",
-  });
-
-  // Photo
-  answers.addPhoto({
-    id: "photo",
-    caption: "Telegram logo.",
-    photo_url: "https://telegram.org/img/t_logo.png",
-    thumb_url: "https://telegram.org/img/t_logo.png",
-  });
-
-  // Gif
-  answers.addGif({
-    id: "gif",
-    gif_url: "https://telegram.org/img/tl_card_wecandoit.gif",
-    thumb_url: "https://telegram.org/img/tl_card_wecandoit.gif",
-  });
-
-  // Send answers
   return bot.answerQuery(answers);
 });
 
