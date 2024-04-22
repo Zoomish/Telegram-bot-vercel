@@ -21,7 +21,7 @@ bot.on(["/start", "/back"], (msg) => {
     { resize: true }
   );
 
-  return bot.sendMessage(msg.from.id, "Keyboard example.", { replyMarkup });
+  return bot.sendMessage(msg.from.id, msg.from.id, { replyMarkup });
 });
 
 // Buttons
