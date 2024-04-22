@@ -1,5 +1,5 @@
 import TeleBot from "telebot";
-
+import projects from "projects";
 const bot = new TeleBot(process.env.TELEGRAM_BOT_TOKEN);
 const WebUrlit = "https://rococo-wisp-b5b1a7.netlify.app/";
 
@@ -12,10 +12,7 @@ bot.on(["/start", "/back"], (msg) => {
     ],
     { resize: true }
   );
-  fetch("https://jsonplaceholder.typicode.com/todos/1")
-    .then((response) => response.json())
-    .then((json) => console.log(json));
-
+  console.log(projects);
   return bot.sendMessage(msg.from.id, "HI", { replyMarkup });
 });
 
